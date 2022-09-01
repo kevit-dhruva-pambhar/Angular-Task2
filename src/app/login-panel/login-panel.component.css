@@ -1,0 +1,117 @@
+
+h1{
+    margin:0;
+    text-align: center;
+    margin-block: 0;
+    color: rgb(0, 0, 0);
+}
+
+.main-section{
+    margin: 0 auto;
+    margin-top: 130px;
+    padding: 0;
+}
+
+.img-responsive{
+    margin-left: 41.2%;
+    margin-top: 17%;
+    max-width: 17%;
+    border-radius: 200%;
+}
+
+.modal-content{
+    background-color: transparent;
+    padding: 0 18px;
+    border-radius: 10px;
+    border: 4px solid rgb(22, 73, 75);
+    left:9%;
+    width:85%;
+    height:max-content;
+}
+
+.form-group{
+    margin-bottom: 2px;
+}
+
+.form-group input{
+    height: 35px;
+    border-radius: 5px;
+    border: 2px solid rgb(109, 104, 104);
+    font-size:16px;
+    letter-spacing: 1px;
+    padding-left: 18px;
+    margin-top: 19px;
+    background-color: transparent;
+}
+
+.btn{
+    margin-top: 20px;
+    margin-left: 0;
+    margin-bottom: 4%;
+    width: 100%;
+    background-color: rgb(240, 240, 121);
+    border-radius: 5px;
+    height: 35px;
+    font-size: 18px;
+    border: 2px solid black;
+    
+}
+
+#question{
+    color: rgb(38, 20, 80);
+    text-decoration: none;
+}
+
+.forgot{
+    margin-bottom: 13px;
+}
+
+#login{
+    text-decoration: none;
+    color: black;
+    font-size: large;
+}
+
+#show_eye, #close_eye{
+    height: 19px;
+    position: absolute;
+    top: 81px;
+    right: 35px;
+}
+
+input.ng-invalid.ng-touched{
+    border: 1px solid red;
+}
+
+.glyphicon-eye-open:before {
+    margin-left: 3px;
+}
+
+.form-control{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.help-block{
+    color: rgb(194, 44, 94);
+}
+
+@media (max-width:425px) {
+    .input-group-append{
+        left:262px;
+    }
+}
+
+@media (max-width:375px) {
+    .input-group-append{
+        left:223px;
+    }
+}
+
+@media (max-width:320px) {
+    .input-group-append{
+        left:178px;
+    }
+}
+
+
+

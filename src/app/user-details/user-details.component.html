@@ -1,0 +1,137 @@
+<div class="row">
+<div class="col-xs-12 col-md-8 col-md-offset-2">
+<div class="row second">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
+       <form [formGroup]="userForm" (ngSubmit)="onFormSubmit()" onsubmit="return false">
+            <div class="form-group">
+                <label class="mandatory" for="name"> Name </label>
+                <input 
+                type="text"
+                id="name"
+                class="form-control"
+                formControlName="uname">
+                <span class="help-block" *ngIf="!userForm.get('uname').valid && userForm.get('uname').touched"> Spaces aren't allowed at the beginning,use only alphabets! </span>
+            </div>
+
+        
+            <div class="form-group">
+                <label class="mandatory" for="email">Email</label>
+                <input
+                type="email"
+                id="email"
+                class="form-control"
+                formControlName="email">
+                <span class="help-block" *ngIf="!userForm.get('email').valid && userForm.get('email').touched"> Please enter a valid email! </span>
+            </div>
+            
+            <div class="form-group">
+                <label class="mandatory" for="dob"> Date Of Birth </label>
+                <input
+                type="date"
+                id="date"
+                class="form-control"
+                formControlName="date">
+            </div>
+
+            <div class="form-group">
+                <label class="mandatory" for="phone-number"> Phone Number</label>
+                <input
+                type="text"
+                id="contact"
+                class="form-control"
+                formControlName="contact">
+                <span class="help-block" *ngIf="!userForm.get('contact').valid && userForm.get('contact').touched"> Enter 10 digits only! </span>
+            </div>
+
+            <div class="form-group">
+                <label class="mandatory" for="education"> Education </label>
+                <input
+                type="text"
+                id="school"
+                class="form-control"
+                formControlName="school"
+                placeholder="Name of institute/school"> 
+                <span class="help-block" *ngIf="!userForm.get('school').valid && userForm.get('school').touched"> Enter text only! </span>
+                <input
+                type="text"
+                id="education"
+                class="form-control"
+                formControlName="education"
+                placeholder="Education"> 
+                <span class="help-block" *ngIf="!userForm.get('education').valid && userForm.get('education').touched"> Enter Valid Degree Course! </span>
+               <input
+                type="text"
+                id="percent"
+                class="form-control"
+                formControlName="percent"
+                placeholder="Percentage"> 
+                <div class="input-group-append"> <span class="symbol"> % </span> </div>
+            </div>
+
+            <div class="form-group">
+                <label for="hobbies"> Hobbies </label> <br>
+                <div  formArrayName="hobby"
+                      *ngFor="let hobbyname of userForm.get('hobby')['controls']; let i=index">
+                    <input
+                    type="checkbox"
+                    id="hobby1"
+                    class="form-check-input"
+                    value = "{{hobbies[i].hobName}}"
+                    [formControlName]="i"> &nbsp;
+                <label for="hobby" class="lab">{{hobbies[i].hobName}}</label> <br>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="mandatory" for="gender"> Gender </label> <br>
+                <div *ngFor="let gender of genders">
+                    <input
+                    type="radio"
+                    id="gender"
+                    class="form-check-input"
+                    formControlName="gender"
+                    name="gender"
+                    [value]="gender"> &nbsp;
+                    <label for="gender" class="gen">{{ gender }}</label> 
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address</label>
+                <textarea
+                rows="5" cols="8"
+                id="address"
+                class="form-control"
+                formControlName="address"> </textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="summary">Summary</label>
+                <textarea
+                rows="5" cols="8"
+                id="summary"
+                class="form-control"
+                formControlName="summary"> </textarea>
+            </div>
+
+           <button 
+                class="btn btn-primary" 
+                type="submit"
+                [disabled] = '!userForm.valid'
+                > Submit
+           </button>
+        
+
+            <button 
+              class="btn btn-primary" 
+              type="reset"> Reset
+            </button>
+        </form>
+     </div>
+</div>
+</div>
+</div>
+
+
+ 
+

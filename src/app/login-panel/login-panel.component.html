@@ -1,0 +1,47 @@
+
+    <img src="https://cdn.dribbble.com/users/78977/screenshots/3156562/bestfriends.gif"
+         class="img-responsive"
+         width="200" height="200">
+    <h1> SIGN IN</h1>
+
+
+    <div class="modal-dialog text-center">
+     
+        <div class="modal-content">    
+          
+
+              <div class="col-12 form-input">
+              <form [formGroup]="loginForm">
+                <div class="form-group">
+                    <input type="email" 
+                           class="form-control" 
+                           placeholder="Enter Email"
+                           formControlName="loginEmail">
+                <span class="help-block" *ngIf="!loginForm.get('loginEmail').valid && loginForm.get('loginEmail').touched"> Please enter a valid email! </span>
+                </div>
+                <div class="form-group">
+                    <input [type]="typeName" 
+                           id="password"
+                           class="form-control" 
+                           placeholder="Enter password"
+                           formControlName="loginPassword">
+                    <img id="show_eye" src="https://cdns.iconmonstr.com/wp-content/releases/preview/2017/240/iconmonstr-eye-9.png" [hidden]="showPassword" (click)="toggleShow()">
+                    <img id="close_eye" src="https://www.iconbolt.com/preview/facebook/font-awesome-regular/eye-slash.svg" [hidden]="!showPassword" (click)="toggleShow()">
+                  <span class="help-block" 
+                                 *ngIf="!loginForm.get('loginPassword').valid && loginForm.get('loginPassword').touched"> 
+                                 Must contain at least one number, one uppercase ,one lowercase letter and a special character, and at least 8 or more characters 
+                  </span>
+                </div>
+               <a id="login" routerLink="/userdetails">  <button type="submit" class="btn" [disabled] = '!loginForm.valid'> LOGIN </button> </a> 
+              </form>
+              </div>
+
+              <div class="col-12 forgot">
+                <a id="question" href="#"> Forgot Password? </a>
+              </div>
+
+              
+        </div>
+    </div>
+
+    

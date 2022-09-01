@@ -1,0 +1,48 @@
+.details{
+    background-color:rgb(0, 0, 0);
+    color: white;
+    border-radius: 5px;
+    margin-top: 4%;
+}
+
+#first{
+    margin-top: 3%;
+}
+
+h3{
+    color: rgb(182, 64, 182);
+    text-align: center;
+}
+
+b{
+    color: white;
+}
+
+.add{
+    background-color: blueviolet;
+    color: white;
+    align-content: center;
+    margin-left: 45%;
+}
+
+.btn{
+ margin-bottom: 3%;
+}
+
+@media (max-width:768px){
+    .add{
+        margin-left: 42%;
+    }
+}
+
+@media (max-width:425px){
+    .add{
+        margin-left: 36%;
+    }
+}
+
+@media (max-width:320px){
+    .add{
+        margin-left: 32%;
+    }
+}

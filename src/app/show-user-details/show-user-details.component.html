@@ -1,0 +1,27 @@
+
+<div class="row">
+    <h3> User Details </h3>
+    <a routerLink="/userdetails"><button class="btn btn primary add"> Add New User </button></a> <br> <br>
+    <div class="col-xs-12 details" *ngFor="let detail of details">
+        <p id="first"> <b>Name:</b> {{detail.uname}} </p>
+        <p> <b>Email:</b> {{detail.email}} </p>
+        <p> <b>Date Of Birth:</b>  {{detail.date | date: "longDate"}} </p>
+        <p> <b>Number:</b>  {{detail.contact}} </p>
+        <p> <b>Education:</b> <br>
+                      <span> <u>School/Institue:</u> {{detail.school}} </span> <br>
+                      <span> <u>Percentage:</u> {{detail.percent}}% </span> <br>
+                      <span> <u>Educational Degree:</u> {{detail.education}} </span>
+        </p>
+        <p *ngIf="detail.selected"> <b>Hobbies:</b> {{detail.selected}} </p>
+        <p> <b>Gender:</b> {{detail.gender}} </p>
+        <p *ngIf="detail.address"> <b>Address:</b> {{detail.address}} </p>
+        <p *ngIf="detail.summary"> <b>Summary:</b> {{detail.summary}} </p>
+
+        <a routerLink="/userdetails/{{detail.uid}}"><button class="btn btn primary">Edit</button></a>
+    </div>
+</div> 
+
+ 
+
+
+
