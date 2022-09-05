@@ -37,7 +37,7 @@ export class UserDetailsComponent  {
   ];
   genders:string[] = ['Male','Female'];
   id: string;
-  selectedHobbies:string[] = ['candies'];
+  selectedHobbies:string[] = [];
 
  
   constructor(private userService: UserService,
