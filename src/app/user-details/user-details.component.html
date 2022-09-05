@@ -70,14 +70,13 @@
 
             <div class="form-group">
                 <label for="hobbies"> Hobbies </label> <br>
-                <div  formArrayName="hobby"
+                <div formArrayName="hobby"
                       *ngFor="let hobbyname of userForm.get('hobby')['controls']; let i=index">
                     <input
                     type="checkbox"
                     id="hobby1"
                     class="form-check-input"
-                    value = "{{hobbies[i].hobName}}"
-                    [formControlName]="i"> &nbsp;
+                    [formControl]="hobbyname"> &nbsp;
                 <label for="hobby" class="lab">{{hobbies[i].hobName}}</label> <br>
                 </div>
             </div>

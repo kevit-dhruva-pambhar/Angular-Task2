@@ -23,12 +23,12 @@ export class UserDetailsComponent  {
       select:false
     },
     {
-      hobName:'Cooking',
-      select: false
-    },
-    {
       hobName:'Singing',
       select:false
+    },
+    {
+      hobName:'Cooking',
+      select: false
     },
     {
       hobName:'Reading',
@@ -37,7 +37,7 @@ export class UserDetailsComponent  {
   ];
   genders:string[] = ['Male','Female'];
   id: string;
-  selectedHobbies:string[] = [];
+  selectedHobbies:string[] = ['candies'];
 
  
   constructor(private userService: UserService,
@@ -59,12 +59,25 @@ export class UserDetailsComponent  {
       'hobby':new FormArray([]),
     });
 
-      for(let i=0; i<this.hobbies.length; i++){
-        const getControls = this.userForm.get('hobby') as FormArray; 
-        getControls.push(new FormControl(false));
-      }
-
+   
       this.id = this.route.snapshot.params.id;
+      if(this.id == null){
+        for(let i=0; i<this.hobbies.length; i++){
+          const getControls = this.userForm.get('hobby') as FormArray;
+          getControls.push(new FormControl(false));
+        }
+      }else{
+        var getid = this.userService.details.findIndex(p => p['uid'] === this.id);
+        for(let i=0; i<this.hobbies.length; i++){
+          const getControls = this.userForm.get('hobby') as FormArray;
+          if(this.userService.details[getid].selected.includes(this.hobbies[i].hobName)){
+            getControls.push(new FormControl(true));
+          }
+          else{
+            getControls.push(new FormControl(false));
+          }
+        }
+      }
 
       if(this.id!=null){
         this.initForm(this.id);
@@ -81,7 +94,7 @@ export class UserDetailsComponent  {
       }
       else{
         var ind = this.userService.details.findIndex(p => p['uid'] === this.id);
-        this.userService.details[ind] = {...this.userForm.value, selected,uid:this.userService.userId};
+        this.userService.details[ind] = {...this.userForm.value,selected,uid:this.userService.userId};
         this.router.navigate(['/showdetails']);
       }
     }
@@ -95,7 +108,7 @@ export class UserDetailsComponent  {
         }
       })
     }
-
+    
 
     private initForm(id: string){
       var index = this.userService.details.findIndex(p => p['uid'] === id);
@@ -110,15 +123,7 @@ export class UserDetailsComponent  {
         'gender': this.userService.details[index].gender,
         'address': this.userService.details[index].address,
         'summary': this.userService.details[index].summary,
-        'hobby': this.userService.details[index].hobby
       });
     } 
 }
-    
-
-   
-
-
-  
-
 
