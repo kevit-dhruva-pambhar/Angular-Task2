@@ -2,10 +2,12 @@ interface IHob  {
 hobName: string;
 select: boolean;
 }
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Regex } from 'src/patterns';
+import { User } from '../user.model';
 import { UserService } from '../user.service';
 
 
@@ -37,12 +39,15 @@ export class UserDetailsComponent  {
   ];
   genders:string[] = ['Male','Female'];
   id: string;
-  selectedHobbies:string[] = ['candies'];
+  selectedHobbies:string[] = [];
+  userDetails: User[];
+  user: User;
 
  
   constructor(private userService: UserService,
               private router: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private http: HttpClient) { }
 
   ngOnInit(): void {
     this.userForm = new FormGroup({
@@ -59,28 +64,33 @@ export class UserDetailsComponent  {
       'hobby':new FormArray([]),
     });
 
-   
+     
+      this.userDetails = this.userService.details;
       this.id = this.route.snapshot.params.id;
+
+
       if(this.id == null){
         for(let i=0; i<this.hobbies.length; i++){
           const getControls = this.userForm.get('hobby') as FormArray;
           getControls.push(new FormControl(false));
         }
       }else{
-        var getid = this.userService.details.findIndex(p => p['uid'] === this.id);
-        for(let i=0; i<this.hobbies.length; i++){
-          const getControls = this.userForm.get('hobby') as FormArray;
-          if(this.userService.details[getid].selected.includes(this.hobbies[i].hobName)){
-            getControls.push(new FormControl(true));
+        this.userService.getUsers().subscribe(
+          res => {
+            this.userDetails = res;
+            this.initForm(this.id);  
+            var getid = this.userDetails.findIndex(p => p['uid'] === this.id);
+            for(let i=0; i<this.hobbies.length; i++){
+              const getControls = this.userForm.get('hobby') as FormArray;
+              if(this.userDetails[getid].selected.includes(this.hobbies[i].hobName)){
+                getControls.push(new FormControl(true));
+              }
+              else{
+                getControls.push(new FormControl(false));
+              }
+            }
           }
-          else{
-            getControls.push(new FormControl(false));
-          }
-        }
-      }
-
-      if(this.id!=null){
-        this.initForm(this.id);
+        );
       }
   }
 
@@ -90,12 +100,15 @@ export class UserDetailsComponent  {
       let selected = this.selectedHobbies;
       if(!this.id){
        this.router.navigate(['/showdetails']);
-       this.userService.details.push({...this.userForm.value,selected,uid:this.userService.userId});
+       this.userDetails.push({...this.userForm.value,selected,uid:this.userService.userId});
+       this.userService.postUsers({...this.userForm.value,selected,uid:this.userService.userId});
       }
       else{
-        var ind = this.userService.details.findIndex(p => p['uid'] === this.id);
-        this.userService.details[ind] = {...this.userForm.value,selected,uid:this.userService.userId};
+        var ind = this.userDetails.findIndex(p => p['uid'] === this.id);
+        var editId = this.userDetails[ind].id;
         this.router.navigate(['/showdetails']);
+        this.userDetails[ind] = {...this.userForm.value,selected,uid:this.userService.userId};
+        this.userService.updateUser(editId,{...this.userForm.value,selected,uid:this.userService.userId});
       }
     }
 
@@ -111,18 +124,18 @@ export class UserDetailsComponent  {
     
 
     private initForm(id: string){
-      var index = this.userService.details.findIndex(p => p['uid'] === id);
+      var index = this.userDetails.findIndex(p => p['uid'] === id);
       this.userForm.patchValue({
-        'uname': this.userService.details[index].uname,
-        'email': this.userService.details[index].email,
-        'date': this.userService.details[index].date,
-        'contact': this.userService.details[index].contact,
-        'education': this.userService.details[index].education,
-        'percent': this.userService.details[index].percent,
-        'school': this.userService.details[index].school,
-        'gender': this.userService.details[index].gender,
-        'address': this.userService.details[index].address,
-        'summary': this.userService.details[index].summary,
+        'uname': this.userDetails[index].uname,
+        'email': this.userDetails[index].email,
+        'date': this.userDetails[index].date,
+        'contact': this.userDetails[index].contact,
+        'education': this.userDetails[index].education,
+        'percent': this.userDetails[index].percent,
+        'school': this.userDetails[index].school,
+        'gender': this.userDetails[index].gender,
+        'address': this.userDetails[index].address,
+        'summary': this.userDetails[index].summary,
       });
     } 
 }

@@ -11,6 +11,7 @@ const appRoutes: Routes =[
     },
     {path:'userdetails' , component: UserDetailsComponent},
     {path:'showdetails', component: ShowUserDetailsComponent},
+    {path:'showdetails/:id', component: ShowUserDetailsComponent},
     {path:'userdetails/:id', component: UserDetailsComponent}
 ];
 

@@ -10,7 +10,8 @@ export class User {
      address?: string;
      summary?: string;
      selected?: string[];
-     uid: string
+     uid: string;
+     id: number;
    
     
     constructor(name: string, email: string, dob: string, phn: string,  scl: string,
@@ -19,7 +20,8 @@ export class User {
         gen: string,
         add: string,
         summ: string,
-        selected: string[]
+        selected: string[],
+        id: number
        ) {
         this.uname = name;
         this.email = email;
@@ -31,6 +33,7 @@ export class User {
         this.summary = summ;
         this.gender = gen;
         this.address = add;  
-        this.selected = selected 
+        this.selected = selected;
+        this.id = id;
     }
 }

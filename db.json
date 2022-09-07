@@ -1,0 +1,28 @@
+{
+  "users": [
+    {
+      "uname": "Dhruva",
+      "email": "star@gmail.com",
+      "date": "2022-09-19",
+      "contact": "9876543236",
+      "education": "BA",
+      "percent": "93",
+      "school": "DA",
+      "gender": "Female",
+      "address": null,
+      "summary": null,
+      "hobby": [
+        true,
+        false,
+        true,
+        false
+      ],
+      "selected": [
+        "Drawing",
+        "Cooking"
+      ],
+      "uid": "EvpxWO",
+      "id": 14
+    }
+  ]
+}

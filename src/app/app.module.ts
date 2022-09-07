@@ -8,6 +8,7 @@ import { LoginPanelComponent } from './login-panel/login-panel.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { ShowUserDetailsComponent } from './show-user-details/show-user-details.component';
 import { UserService } from './user.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { UserService } from './user.service';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
