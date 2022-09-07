@@ -22,7 +22,30 @@
         "Cooking"
       ],
       "uid": "EvpxWO",
-      "id": 14
+      "id": 1
+    },
+    {
+      "uname": "Meera",
+      "email": "sta@gmail.com",
+      "date": "2022-09-11",
+      "contact": "9876543236",
+      "education": "BE",
+      "percent": "98",
+      "school": "DA",
+      "gender": "Female",
+      "address": null,
+      "summary": null,
+      "hobby": [
+        true,
+        false,
+        true,
+        false
+      ],
+      "selected": [
+        "Drawing"
+      ],
+      "uid": "AbcdFt",
+      "id": 2
     }
   ]
 }
