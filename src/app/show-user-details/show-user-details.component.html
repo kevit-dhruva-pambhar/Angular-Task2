@@ -2,22 +2,44 @@
 <div class="row">
     <h3> User Details </h3>
     <a routerLink="/userdetails"><button class="btn btn primary add"> Add New User </button></a> <br> <br>
-    <div class="col-xs-12 details" *ngFor="let detail of details">
-        <p id="first"> <b>Name:</b> {{detail.uname}} </p>
-        <p> <b>Email:</b> {{detail.email}} </p>
-        <p> <b>Date Of Birth:</b>  {{detail.date | date: "longDate"}} </p>
-        <p> <b>Number:</b>  {{detail.contact}} </p>
-        <p> <b>Education:</b> <br>
-                      <span> <u>School/Institue:</u> {{detail.school}} </span> <br>
-                      <span> <u>Percentage:</u> {{detail.percent}}% </span> <br>
-                      <span> <u>Educational Degree:</u> {{detail.education}} </span>
-        </p>
-        <p *ngIf="detail.selected"> <b>Hobbies:</b> {{detail.selected}} </p>
-        <p> <b>Gender:</b> {{detail.gender}} </p>
-        <p *ngIf="detail.address"> <b>Address:</b> {{detail.address}} </p>
-        <p *ngIf="detail.summary"> <b>Summary:</b> {{detail.summary}} </p>
 
-        <a routerLink="/userdetails/{{detail.uid}}"><button class="btn btn primary">Edit</button></a>
+    <table>
+     <thead>
+        <th>Sr. No.</th>
+        <th>UserName</th>
+        <th>Operations</th>
+     </thead>
+     <tbody>
+        <tr *ngFor="let detail of details; let i = index">
+            <td>{{i+1}}</td>
+            <td>{{detail.uname}}</td>
+            <td>
+                <a routerLink="/showdetails/{{detail.uid}}"> <button class="glyphicon glyphicon-info-sign" (click)="getuser(detail.id)"></button> </a> &nbsp;
+                <a routerLink="/userdetails/{{detail.uid}}"> <button class="glyphicon glyphicon-edit"></button> </a> &nbsp;
+                <button class="glyphicon glyphicon-trash" (click)="delete(detail)"></button> &nbsp;
+            </td>
+        </tr>
+     </tbody>
+    </table> <br>
+   
+    <p class="no-user" *ngIf="!clicked">Select an user to view Details!</p>
+
+    <div *ngIf="clicked">
+        <div class="col-xs-12 details" *ngIf="user">
+            <p id="first"> <b>Name:</b> {{user.uname}} </p>
+            <p> <b>Email:</b> {{user.email}} </p>
+            <p> <b>Date Of Birth:</b>  {{user.date | date: "longDate"}} </p>
+            <p> <b>Number:</b>  {{user.contact}} </p>
+            <p> <b>Education:</b> <br>
+                        <span> <u>School/Institue:</u> {{user.school}} </span> <br>
+                        <span> <u>Percentage:</u> {{user.percent}}% </span> <br>
+                        <span> <u>Educational Degree:</u> {{user.education}} </span>
+            </p>
+            <p *ngIf="user.selected"> <b>Hobbies:</b> {{user.selected}} </p>
+            <p> <b>Gender:</b> {{user.gender}} </p>
+            <p *ngIf="user.address"> <b>Address:</b> {{user.address}} </p>
+            <p *ngIf="user.summary"> <b>Summary:</b> {{user.summary}} </p>
+        </div>
     </div>
 </div> 
 
