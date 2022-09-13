@@ -21,7 +21,12 @@
         "Drawing",
         "Cooking"
       ],
+<<<<<<< HEAD
       "id": "Ry7z27"
+=======
+      "uid": "EvpxWO",
+      "id": 1
+>>>>>>> 5c946b5020454f7781f4f4950620eaa04987f14a
     },
     {
       "uname": "Meera",
@@ -43,6 +48,7 @@
       "selected": [
         "Drawing"
       ],
+<<<<<<< HEAD
       "id": "AbcdFt"
     },
     {
@@ -67,6 +73,10 @@
         "Singing"
       ],
       "id": "p6qcHv"
+=======
+      "uid": "AbcdFt",
+      "id": 2
+>>>>>>> 5c946b5020454f7781f4f4950620eaa04987f14a
     }
   ]
 }
