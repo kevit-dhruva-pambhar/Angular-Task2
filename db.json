@@ -21,8 +21,7 @@
         "Drawing",
         "Cooking"
       ],
-      "uid": "EvpxWO",
-      "id": 1
+      "id": "Ry7z27"
     },
     {
       "uname": "Meera",
@@ -44,8 +43,30 @@
       "selected": [
         "Drawing"
       ],
-      "uid": "AbcdFt",
-      "id": 2
+      "id": "AbcdFt"
+    },
+    {
+      "uname": "Meghu",
+      "email": "megha@tyre34",
+      "date": "2022-09-12",
+      "contact": "7574993099",
+      "education": "BE",
+      "percent": "98",
+      "school": "DA",
+      "gender": "Female",
+      "address": null,
+      "summary": null,
+      "hobby": [
+        true,
+        true,
+        false,
+        false
+      ],
+      "selected": [
+        "Drawing",
+        "Singing"
+      ],
+      "id": "p6qcHv"
     }
   ]
 }

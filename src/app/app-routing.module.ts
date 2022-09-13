@@ -10,8 +10,10 @@ const appRoutes: Routes =[
         {path:'loginpanel',component: LoginPanelComponent}]
     },
     {path:'userdetails' , component: UserDetailsComponent},
-    {path:'showdetails', component: ShowUserDetailsComponent},
-    {path:'showdetails/:id', component: ShowUserDetailsComponent},
+    {path:'showdetails', component: ShowUserDetailsComponent,children:[
+        {path:':id', component: ShowUserDetailsComponent},
+    ]},
+   
     {path:'userdetails/:id', component: UserDetailsComponent}
 ];
 

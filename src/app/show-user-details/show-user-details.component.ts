@@ -1,4 +1,5 @@
 import { Component, OnInit} from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../user.model';
 import { UserService } from '../user.service';
 
@@ -10,25 +11,23 @@ import { UserService } from '../user.service';
 })
 export class ShowUserDetailsComponent implements OnInit {
   user: User;
-  details: User[];
-  key: string;
-  clicked: boolean = false;
+  userDetails: User[];
+  showUserInfo: boolean = false;
   
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.user = this.userService.user;
-    this.details = this.userService.details;
-    this.key = this.userService.userId;
     this.getAllUsers();
   }  
 
-  delete(detail: any){
-    this.userService.deleteUser(detail.id).subscribe(
+  delete(userdetail: any){
+    this.userService.deleteUser(userdetail.id).subscribe(
       (res) => {
         alert('User Deleted')
         this.getAllUsers();
-        this.clicked = false;
+        this.showUserInfo = false;
       }
     );
   }
@@ -36,15 +35,16 @@ export class ShowUserDetailsComponent implements OnInit {
   getAllUsers(){
     this.userService.getUsers().subscribe(
       res => {
-        this.details = res;
+        this.userDetails = res;
       });
   }
 
   
-  getuser(id: number){
-    this.clicked = true;
+  getuser(id: string){
     this.userService.getUser(id).subscribe(
         res => {
+          this.showUserInfo = true;
+          this.router.navigate([id],{relativeTo: this.route});
           this.user = res;
         });
   }

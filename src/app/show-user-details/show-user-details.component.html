@@ -9,21 +9,21 @@
         <th>Operations</th>
      </thead>
      <tbody>
-        <tr *ngFor="let detail of details; let i = index">
+        <tr *ngFor="let userdetail of userDetails; let i = index">
             <td>{{i+1}}</td>
-            <td>{{detail.uname}}</td>
+            <td>{{userdetail.uname}}</td>
             <td>
-                <a routerLink="/showdetails/{{detail.uid}}"> <button class="glyphicon glyphicon-info-sign" (click)="getuser(detail.id)"></button> </a> &nbsp;
-                <a routerLink="/userdetails/{{detail.uid}}"> <button class="glyphicon glyphicon-edit"></button> </a> &nbsp;
-                <button class="glyphicon glyphicon-trash" (click)="delete(detail)"></button> &nbsp;
+                <a> <button class="glyphicon glyphicon-info-sign" (click)="getuser(userdetail.id)"></button> </a> &nbsp;
+                <a routerLink="/userdetails/{{userdetail.id}}"> <button class="glyphicon glyphicon-edit"></button> </a> &nbsp;
+                <button class="glyphicon glyphicon-trash" (click)="delete(userdetail)"></button> &nbsp;
             </td>
         </tr>
      </tbody>
     </table> <br>
    
-    <p class="no-user" *ngIf="!clicked">Select an user to view Details!</p>
+    <p class="no-user" *ngIf="!showUserInfo">Select an user to view Details!</p>
 
-    <div *ngIf="clicked">
+    <div *ngIf="showUserInfo">
         <div class="col-xs-12 details" *ngIf="user">
             <p id="first"> <b>Name:</b> {{user.uname}} </p>
             <p> <b>Email:</b> {{user.email}} </p>

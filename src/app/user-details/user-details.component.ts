@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Regex } from 'src/patterns';
 import { User } from '../user.model';
 import { UserService } from '../user.service';
+import { nanoid } from "nanoid";
 
 
 @Component({
@@ -42,7 +43,7 @@ export class UserDetailsComponent  {
   selectedHobbies:string[] = [];
   userDetails: User[];
   user: User;
-
+  
  
   constructor(private userService: UserService,
               private router: Router,
@@ -65,33 +66,31 @@ export class UserDetailsComponent  {
     });
 
      
-      this.userDetails = this.userService.details;
+    
       this.id = this.route.snapshot.params.id;
 
 
-      if(this.id == null){
+      if(!this.id){
         for(let i=0; i<this.hobbies.length; i++){
           const getControls = this.userForm.get('hobby') as FormArray;
           getControls.push(new FormControl(false));
         }
       }else{
-        this.userService.getUsers().subscribe(
+        this.userService.getUser(this.id).subscribe(
           res => {
-            this.userDetails = res;
+            this.user = res;
             this.initForm(this.id);  
-            var getid = this.userDetails.findIndex(p => p['uid'] === this.id);
             for(let i=0; i<this.hobbies.length; i++){
               const getControls = this.userForm.get('hobby') as FormArray;
-              if(this.userDetails[getid].selected.includes(this.hobbies[i].hobName)){
+              if(this.user.selected.includes(this.hobbies[i].hobName)){
                 getControls.push(new FormControl(true));
               }
               else{
                 getControls.push(new FormControl(false));
               }
             }
-          }
-        );
-      }
+          });
+        }
   }
 
     
@@ -99,16 +98,16 @@ export class UserDetailsComponent  {
       this.onChange();
       let selected = this.selectedHobbies;
       if(!this.id){
-       this.router.navigate(['/showdetails']);
-       this.userDetails.push({...this.userForm.value,selected,uid:this.userService.userId});
-       this.userService.postUsers({...this.userForm.value,selected,uid:this.userService.userId});
+       this.userService.postUsers({...this.userForm.value,selected,id: nanoid(6)}).subscribe(
+        res => {
+          this.router.navigate(['/showdetails']);
+       });
       }
       else{
-        var ind = this.userDetails.findIndex(p => p['uid'] === this.id);
-        var editId = this.userDetails[ind].id;
-        this.router.navigate(['/showdetails']);
-        this.userDetails[ind] = {...this.userForm.value,selected,uid:this.userService.userId};
-        this.userService.updateUser(editId,{...this.userForm.value,selected,uid:this.userService.userId});
+        this.userService.updateUser(this.id,{...this.userForm.value,selected,id:this.id}).subscribe(
+          res => {
+              this.router.navigate(['/showdetails']);
+          });
       }
     }
 
@@ -125,18 +124,17 @@ export class UserDetailsComponent  {
     
 
     private initForm(id: string){
-      var index = this.userDetails.findIndex(p => p['uid'] === id);
       this.userForm.patchValue({
-        'uname': this.userDetails[index].uname,
-        'email': this.userDetails[index].email,
-        'date': this.userDetails[index].date,
-        'contact': this.userDetails[index].contact,
-        'education': this.userDetails[index].education,
-        'percent': this.userDetails[index].percent,
-        'school': this.userDetails[index].school,
-        'gender': this.userDetails[index].gender,
-        'address': this.userDetails[index].address,
-        'summary': this.userDetails[index].summary,
+        'uname': this.user.uname,
+        'email': this.user.email,
+        'date': this.user.date,
+        'contact': this.user.contact,
+        'education': this.user.education,
+        'percent': this.user.percent,
+        'school': this.user.school,
+        'gender': this.user.gender,
+        'address': this.user.address,
+        'summary': this.user.summary,
       });
     } 
 }
